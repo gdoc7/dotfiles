@@ -1,0 +1,7 @@
+[user]
+	name = gabriel
+	email = gabrielojeda7@gmail.com
+[url "git@github-koandina:koandina/"]
+	insteadOf = git@github.com:koandina/
+[url "git@github-koandina-enterprise:koandina-code/"]
+	insteadOf = git@github.com:koandina-code/

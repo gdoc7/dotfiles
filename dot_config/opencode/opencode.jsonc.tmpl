@@ -1,0 +1,157 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "opencode-gemini-auth@latest"
+  ],
+  "provider": {
+    "google": {
+      "options": {
+        "projectId": "project-14a7f202-84ae-4fbf-a50"
+      }
+    }
+  },
+  "mcp": {
+    "postgres-local": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "DATABASE_URI",
+        "crystaldba/postgres-mcp",
+        "--access-mode=unrestricted"
+      ],
+      "environment": {
+        "DATABASE_URI": "{{ .opencode.postgres_local_uri }}"
+      },
+      "enabled": false
+    },
+    "postgres": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "DATABASE_URI",
+        "crystaldba/postgres-mcp",
+        "--access-mode=unrestricted"
+      ],
+      "environment": {
+        "DATABASE_URI": "{{ .opencode.postgres_rafam_dev_uri }}"
+      },
+      "enabled": false
+    },
+    "postgres-kontafy": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "--add-host",
+        "host.docker.internal:host-gateway",
+        "-e",
+        "DATABASE_URI",
+        "crystaldba/postgres-mcp",
+        "--access-mode=unrestricted"
+      ],
+      "environment": {
+        "DATABASE_URI": "{{ .opencode.postgres_kontafy_uri }}"
+      },
+      "enabled": false
+    },
+    "postgres-rafam": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "DATABASE_URI",
+        "crystaldba/postgres-mcp",
+        "--access-mode=unrestricted"
+      ],
+      "environment": {
+        "DATABASE_URI": "{{ .opencode.postgres_rafam_alt_uri }}"
+      },
+      "enabled": false
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{{ .opencode.context7_api_key }}"
+      },
+      "enabled": false
+    },
+    "gitlab-rafam": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@zereight/mcp-gitlab"
+      ],
+      "environment": {
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "{{ .opencode.gitlab_rafam_token }}",
+        "GITLAB_API_URL": "https://www.git.rafam.ec.gba.gov.ar"
+      },
+      "enabled": false
+    },
+    "gitlab-epi": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@zereight/mcp-gitlab"
+      ],
+      "environment": {
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "{{ .opencode.gitlab_epi_token }}",
+        "GITLAB_API_URL": "https://www.git.rafam.ec.gba.gov.ar"
+      },
+      "enabled": false
+    },
+    "taiga": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "TAIGA_API_URL",
+        "-e",
+        "TAIGA_USERNAME",
+        "-e",
+        "TAIGA_PASSWORD",
+        "ghcr.io/tetra-2023/pytaiga-mcp:latest"
+      ],
+      "enabled": false,
+      "environment": {
+        "TAIGA_API_URL": "https://api.taiga.io",
+        "TAIGA_USERNAME": "gabrielojeda7@gmail.com",
+        "TAIGA_PASSWORD": "{{ .opencode.taiga_password }}"
+      }
+    },
+    "notionApi": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "-i",
+        "-e",
+        "NOTION_TOKEN",
+        "mcp/notion"
+      ],
+      "enabled": false,
+      "environment": {
+        "NOTION_TOKEN": "{{ .opencode.notion_token }}"
+      }
+    }
+  }
+}
