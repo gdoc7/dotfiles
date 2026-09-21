@@ -97,3 +97,36 @@ export GEM_HOME="$HOME/gems"
 
 export EDITOR=nvim
 
+alias npm="sfw npm"
+
+export PATH=$PATH:$(go env GOPATH)/bin
+
+# mimocode
+export PATH=/home/gabri/.mimocode/bin:$PATH
+
+
+audit_cli() {
+    if [ -z "$1" ]; then
+        echo "Uso: audit_cli <comando>"
+        return 1
+    fi
+    
+    export HTTP_PROXY="http://127.0.0.1:8080"
+    export HTTPS_PROXY="http://127.0.0.1:8080"
+    export NODE_TLS_REJECT_UNAUTHORIZED=0
+    
+    eval "$@"
+    
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+    unset NODE_TLS_REJECT_UNAUTHORIZED
+}
+
+alias opencode='env -u TMUX -u TMUX_PANE opencode'
+
+# pnpm
+export PNPM_HOME="/home/gabri/.local/share/pnpm"
+export PATH="$PNPM_HOME/bin:$PNPM_HOME:$PATH"
+#/ pnpm end
+#
+export TYPESAFE_API_KEY="{{ (pass "chezmoi/opencode/typesafe_api_key") }}"

@@ -5,3 +5,7 @@
 	insteadOf = git@github.com:koandina/
 [url "git@github-koandina-enterprise:koandina-code/"]
 	insteadOf = git@github.com:koandina-code/
+[includeIf "gitdir:~/koandina/"]
+	path = ~/.gitconfig-koandina
+[http]
+	postBuffer = 524288000

@@ -45,6 +45,25 @@
       },
       "enabled": false
     },
+    "postgres-kontafy-personal": {
+      "type": "local",
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "--add-host",
+        "host.docker.internal:host-gateway",
+        "-e",
+        "DATABASE_URI",
+        "crystaldba/postgres-mcp",
+        "--access-mode=unrestricted"
+      ],
+      "environment": {
+        "DATABASE_URI": "{{ (pass "chezmoi/opencode/postgres_kontafy_personal_uri") }}"
+      },
+      "enabled": false
+    },
     "postgres-kontafy": {
       "type": "local",
       "command": [
@@ -81,6 +100,20 @@
       },
       "enabled": false
     },
+    "engram": {
+      "command": [
+        "/home/gabri/go/bin/engram",
+        "mcp",
+        "--tools=agent"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
+    "supabase": {
+      "type": "remote",
+      "url": "https://mcp.supabase.com/mcp?project_ref=vcwpestqvpneemzdxcfe",
+      "enabled": false
+    },
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
@@ -111,7 +144,7 @@
       ],
       "environment": {
         "GITLAB_PERSONAL_ACCESS_TOKEN": "{{ (pass "chezmoi/opencode/gitlab_epi_token") }}",
-        "GITLAB_API_URL": "https://www.git.rafam.ec.gba.gov.ar"
+        "GITLAB_API_URL": "https://gitlab.epidataconsulting.com"
       },
       "enabled": false
     },
